@@ -4,12 +4,16 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
+import { ReqtopicComponent } from './reqtopic/reqtopic.component';
+import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    ReqtopicComponent,
+    LeaderboardComponent
   ],
   imports: [
     BrowserModule,
@@ -22,6 +26,14 @@ import { HomeComponent } from './home/home.component';
       {
         path: 'home',
         component: HomeComponent
+      },
+      {
+        path: 'reqtopic',
+        component: ReqtopicComponent
+      },
+      {
+        path: 'leaderboard',
+        component: LeaderboardComponent
       }
     ])
   ],
