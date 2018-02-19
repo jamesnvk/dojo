@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { ReqtopicComponent } from './reqtopic/reqtopic.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { LeaderboardComponent } from './leaderboard/leaderboard.component';
     AppComponent,
     HomeComponent,
     ReqtopicComponent,
-    LeaderboardComponent
+    LeaderboardComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
