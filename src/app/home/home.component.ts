@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+  topics = [];
+  isDataLoaded = false;
 
   ngOnInit() {
+    this.http.get("https://jsonplaceholder.typicode.com/users")
+      .subscribe(data => {
+        data.forEach(i => {
+          this.topics.push(i['name'])
+        })
+      });
+    this.isDataLoaded = true;
+  }
+
+  teach() {
+    alert("this is working!");
+    console.log(this.topics);
   }
 
 }

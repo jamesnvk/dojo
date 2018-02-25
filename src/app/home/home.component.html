@@ -1,37 +1,14 @@
 <div class="py-5">
   <div class="container">
-    <div class="row">
-      <div class="col-md-4">
-        <div class="card">
+    <div class="row" >
+      <div class="col-md-4" *ngFor="let topic of topics">
+        <div class="card" >
           <div class="card-header"> Novice: Username </div>
-          <div class="card-body">
-            <h4>Topic</h4>
+          <div class="card-body" *ngIf="isDataLoaded">
+            <h4>{{topic}}</h4>
             <h6 class="text-muted">1hr 30 mins</h6>
             <p>Some quick example text to build on the card title .</p>
-            <a href="#" class="btn btn-primary">Teach</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card">
-          <div class="card-header"> Novice: Username</div>
-          <div class="card-body">
-            <h4>Topic</h4>
-            <h6 class="text-muted">1hr 30 mins</h6>
-            <p>Kickstarter viral distillery quinoa, artisan post-ironic godard hella paleo single-origin coffee selvage tumblr neutra meggings. Man braid VHS ramps cronut wolf, activated charcoal fixie dreamcatcher. Portland sartorial put a bird on it
-              polaroid plaid. Pinterest williamsburg pickled palo santo health goth. Flannel whatever tacos next level subway tile franzen poke. Semiotics wayfarers </p>
-            <a href="#" class="btn btn-primary">Teach</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card">
-          <div class="card-header"> Novice: Username </div>
-          <div class="card-body">
-            <h4>Topic</h4>
-            <h6 class="text-muted">1hr 30 mins</h6>
-            <p>Some quick example text to build on the card title .</p>
-            <a href="#" class="btn btn-primary">Teach</a>
+            <button (click)="teach()" class="btn btn-primary">Teach</button>
           </div>
         </div>
       </div>
