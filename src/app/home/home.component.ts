@@ -14,12 +14,15 @@ export class HomeComponent implements OnInit {
   isDataLoaded = false;
 
   ngOnInit() {
-    this.http.get("https://jsonplaceholder.typicode.com/users")
+    this.http.get<any[]>("https://jsonplaceholder.typicode.com/users")
       .subscribe(data => {
         data.forEach(i => {
-          this.topics.push(i['name'])
+          this.topics.push(i.name)
         })
-      });
+      },
+        err => {
+        console.log("Error occured:" + err);
+        });
     this.isDataLoaded = true;
   }
 
