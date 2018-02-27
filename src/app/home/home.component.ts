@@ -1,5 +1,6 @@
+import { environment } from '../../environments/environment';
 import { Component, OnInit } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -13,21 +14,24 @@ export class HomeComponent implements OnInit {
   topics = [];
   isDataLoaded = false;
 
+  // https://jsonplaceholder.typicode.com/users
+
   ngOnInit() {
-    this.http.get<any[]>("https://jsonplaceholder.typicode.com/users")
+    let valueHash = {};
+    this.http.get(environment.apiUrl)
       .subscribe(data => {
-        data.forEach(i => {
-          this.topics.push(i.name)
-        })
+        data['Items'].forEach(i => {
+          this.topics.push(i.title);
+        });
       },
         err => {
-        console.log("Error occured:" + err);
+        console.log('Error occured:' + err);
         });
     this.isDataLoaded = true;
   }
 
   teach() {
-    alert("this is working!");
+    alert('this is working!');
     console.log(this.topics);
   }
 
