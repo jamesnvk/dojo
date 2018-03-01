@@ -15,13 +15,28 @@ export class HomeComponent implements OnInit {
   isDataLoaded = false;
 
   // https://jsonplaceholder.typicode.com/users
+  /*
+  {
+  "Items": [
+    {
+      "topicId": "1",
+      "active": true,
+      "description": "This is a dummy description of spring data rest topic",
+      "title": "Spring Data REST"
+    }
+  ],
+  "Count": 1,
+  "ScannedCount": 1
+
+  environment.apiUrl
+}
+   */
 
   ngOnInit() {
-    let valueHash = {};
     this.http.get(environment.apiUrl)
       .subscribe(data => {
         data['Items'].forEach(i => {
-          this.topics.push(i.title);
+          this.topics.push(i);
         });
       },
         err => {

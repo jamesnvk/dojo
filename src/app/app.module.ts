@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { ReqtopicComponent } from './reqtopic/reqtopic.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import {FormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { NavbarComponent } from './navbar/navbar.component';
   imports: [
     BrowserModule,
     HttpClientModule,
+    FormsModule,
     RouterModule.forRoot([
       {
         path: '',

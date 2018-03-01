@@ -5,9 +5,9 @@
         <div class="card" >
           <div class="card-header"> Novice: Username </div>
           <div class="card-body" *ngIf="isDataLoaded">
-            <h4>{{topic}}</h4>
+            <h4>{{topic.title}}</h4>
             <h6 class="text-muted">1hr 30 mins</h6>
-            <p>Some quick example text to build on the card title .</p>
+            <p>{{topic.description}}</p>
             <button (click)="teach()" class="btn btn-primary">Teach</button>
           </div>
         </div>
