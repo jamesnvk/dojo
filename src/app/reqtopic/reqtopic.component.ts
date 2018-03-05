@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {AuthService} from '../auth/auth.service';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-reqtopic',
@@ -11,7 +13,7 @@ export class ReqtopicComponent implements OnInit {
   timeAllottedValues = [15, 30, 60, 90];
   submitted = false;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
   ngOnInit() {
   }
@@ -26,12 +28,8 @@ export class ReqtopicComponent implements OnInit {
 
     topic.value.timeAllotted = timeNum;
 
-    console.log(topic.value);
-
-    this.http.post('https://9jwv1wpu4g.execute-api.us-east-1.amazonaws.com/prod/reqtopic', topic.value)
-      .subscribe(data => {
-        console.log(JSON.stringify(data) + ' has been submitted!');
-      });
+    this.http.post(environment.apiPostTopic, topic.value)
+      .subscribe(data => { return; });
     topic.reset();
   }
 

@@ -9,6 +9,9 @@ import { ReqtopicComponent } from './reqtopic/reqtopic.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import {FormsModule} from '@angular/forms';
+import {AuthService} from './auth/auth.service';
+import { CallbackComponent } from './callback/callback.component';
+import {UserService} from './user/user.service';
 
 
 @NgModule({
@@ -17,7 +20,8 @@ import {FormsModule} from '@angular/forms';
     HomeComponent,
     ReqtopicComponent,
     LeaderboardComponent,
-    NavbarComponent
+    NavbarComponent,
+    CallbackComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +30,7 @@ import {FormsModule} from '@angular/forms';
     RouterModule.forRoot([
       {
         path: '',
-        redirectTo: '/home',
+        redirectTo: 'home',
         pathMatch: 'full'
       },
       {
@@ -40,10 +44,14 @@ import {FormsModule} from '@angular/forms';
       {
         path: 'leaderboard',
         component: LeaderboardComponent
+      },
+      {
+        path: 'callback',
+        component: CallbackComponent
       }
     ])
   ],
-  providers: [],
+  providers: [AuthService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
