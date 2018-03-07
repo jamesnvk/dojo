@@ -4,4 +4,5 @@ export class User {
   public lastName: string;
   public picture: string;
   public numSchooled: number;
+  public updatedAt: string;
 }

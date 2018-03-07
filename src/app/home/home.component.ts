@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   isDataLoaded = false;
 
   ngOnInit() {
-    this.http.get(environment.apiUrl)
+    this.http.get(environment.apiGetActiveTopics)
       .subscribe(data => {
         data['Items'].forEach(i => {
           this.topics.push(i);

@@ -14,8 +14,7 @@ export class CallbackComponent implements OnInit {
   }
 
   ngOnInit() {
-    //upsert then get
-    //this.userService.
+    console.log(this.userService.getUser());
   }
 
 }

@@ -15,13 +15,14 @@
         <li>
           <button class="btn navbar-btn ml-2 text-white btn-primary" (click)="login()"><i class="fa d-inline fa-lg fa-user-circle-o"></i> My Profile </button>
         </li>
-        <!--<li>-->
-          <!--<button-->
-            <!--class="btn btn-primary btn-margin"-->
-            <!--(click)="logout()">-->
-            <!--Log Out-->
-          <!--</button>-->
-        <!--</li>-->
+        <li>
+          <button
+            class="btn btn-primary btn-margin"
+            *ngIf="loggedIn()"
+            (click)="logout()">
+            Log Out
+          </button>
+        </li>
       </ul>
     </div>
   </div>
