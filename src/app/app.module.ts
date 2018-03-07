@@ -12,6 +12,9 @@ import {FormsModule} from '@angular/forms';
 import {AuthService} from './auth/auth.service';
 import { CallbackComponent } from './callback/callback.component';
 import {UserService} from './user/user.service';
+import {AuthGuard} from './auth/auth.guard';
+import { ResolveComponent } from './resolve/resolve.component';
+import {NavbarService} from './navbar/navbar.service';
 
 
 @NgModule({
@@ -21,7 +24,8 @@ import {UserService} from './user/user.service';
     ReqtopicComponent,
     LeaderboardComponent,
     NavbarComponent,
-    CallbackComponent
+    CallbackComponent,
+    ResolveComponent
   ],
   imports: [
     BrowserModule,
@@ -30,28 +34,30 @@ import {UserService} from './user/user.service';
     RouterModule.forRoot([
       {
         path: '',
-        redirectTo: 'home',
-        pathMatch: 'full'
-      },
-      {
-        path: 'home',
-        component: HomeComponent
+        component: HomeComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'reqtopic',
-        component: ReqtopicComponent
+        component: ReqtopicComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'leaderboard',
-        component: LeaderboardComponent
+        component: LeaderboardComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'callback',
         component: CallbackComponent
+      },
+      {
+        path: 'resolve',
+        component: ResolveComponent
       }
     ])
   ],
-  providers: [AuthService, UserService],
+  providers: [AuthService, UserService, AuthGuard, NavbarService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

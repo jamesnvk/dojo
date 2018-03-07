@@ -7,8 +7,6 @@ import {environment} from '../../environments/environment';
 @Injectable()
 export class UserService {
 
-  private currentUser: User;
-
   constructor(private router: Router, private http: HttpClient) { }
 
   findOrCreateByUser(payload): void {
@@ -27,22 +25,6 @@ export class UserService {
         user.lastName = data['Attributes'].lastName;
         user.picture = data['Attributes'].picture;
         user.updatedAt = data['Attributes'].updatedAt;
-      },  (err) => console.log(err), () => this.setCurrentUser(user));
-  }
-
-  setCurrentUser(user) {
-    this.currentUser = user;
-  }
-
-  getUser() {
-    return this.currentUser;
-  }
-
-  userLogOut() {
-    this.currentUser = null;
-  }
-
-  isLoggedIn(): boolean {
-    return !this.currentUser === null;
+      },  (err) => console.log(err));
   }
 }

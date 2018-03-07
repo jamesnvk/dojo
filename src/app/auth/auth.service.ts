@@ -17,6 +17,8 @@ export class AuthService {
     scope: 'openid profile'
   });
 
+  public token: string;
+
   constructor(public router: Router, private userService: UserService) {}
 
   public login(): void {
@@ -29,9 +31,9 @@ export class AuthService {
         window.location.hash = '';
         this.setSession(authResult);
         this.userService.findOrCreateByUser(authResult);
-        this.router.navigate(['/home']);
+        this.router.navigate(['/']);
       } else if (err) {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/resolve']);
         console.log(err);
       }
     });
@@ -51,7 +53,7 @@ export class AuthService {
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
     // Go back to the home route
-    this.router.navigate(['/']);
+    this.router.navigate(['/resolve']);
   }
 
   public isAuthenticated(): boolean {

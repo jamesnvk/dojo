@@ -15,14 +15,18 @@ export class HomeComponent implements OnInit {
   isDataLoaded = false;
 
   ngOnInit() {
+    this.getTopics();
+  }
+
+  public getTopics(): void {
     this.http.get(environment.apiGetActiveTopics)
       .subscribe(data => {
-        data['Items'].forEach(i => {
-          this.topics.push(i);
-        });
-      },
+          data['Items'].forEach(i => {
+            this.topics.push(i);
+          });
+        },
         err => {
-        console.log('Error occured:' + err);
+          console.log('Error occured:' + err);
         });
     this.isDataLoaded = true;
   }
