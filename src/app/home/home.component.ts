@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.getTopics();
+    this.isDataLoaded = true;
   }
 
   public getTopics(): void {
@@ -28,7 +29,6 @@ export class HomeComponent implements OnInit {
         err => {
           console.log('Error occured:' + err);
         });
-    this.isDataLoaded = true;
   }
 
   teach() {

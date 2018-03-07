@@ -2,9 +2,9 @@
   <div class="container">
     <div class="row" >
       <div class="col-md-4" *ngFor="let topic of topics">
-        <div class="card" >
+        <div class="card" *ngIf="isDataLoaded">
           <div class="card-header"> Novice: Username </div>
-          <div class="card-body" *ngIf="isDataLoaded">
+          <div class="card-body" >
             <h4>{{topic.title}}</h4>
             <h6 class="text-muted">1hr 30 mins</h6>
             <p>{{topic.description}}</p>
