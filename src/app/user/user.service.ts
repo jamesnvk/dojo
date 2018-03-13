@@ -9,7 +9,7 @@ export class UserService {
 
   constructor(private router: Router, private http: HttpClient) { }
 
-  findOrCreateByUser(payload): void {
+  findOrCreateByUser(payload): User {
 
     let user = new User();
     user.id = Number(payload.idTokenPayload.sub.substr(14));
@@ -26,5 +26,22 @@ export class UserService {
         user.picture = data['Attributes'].picture;
         user.updatedAt = data['Attributes'].updatedAt;
       },  (err) => console.log(err));
+
+    return user;
+  }
+
+  public getCurrentUser() {
+    return JSON.parse(localStorage.getItem('current_user'));
+  }
+
+  public buildUser(payload): User {
+      let user = new User();
+      user.id = Number(payload.idTokenPayload.sub.substr(14));
+      user.firstName = payload.idTokenPayload.given_name;
+      user.lastName = payload.idTokenPayload.family_name;
+      user.picture = payload.idTokenPayload.picture;
+      user.updatedAt = payload.idTokenPayload.updated_at;
+
+      return user;
   }
 }

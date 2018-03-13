@@ -13,11 +13,11 @@ export class AuthService {
     domain: environment.authDomain,
     responseType: 'token id_token',
     audience: 'https://jgdojo.auth0.com/userinfo',
-    redirectUri: 'http://localhost:4200/callback',
+    redirectUri: 'http://localhost:4200',
     scope: 'openid profile'
   });
 
-  public token: string;
+  // redirectUri: environment.endpoint   ->   use as callback URL in auth0 profile
 
   constructor(public router: Router, private userService: UserService) {}
 
@@ -27,28 +27,30 @@ export class AuthService {
 
   public handleAuthentication(): void {
     this.auth0.parseHash((err, authResult) => {
-      if (authResult && authResult.accessToken && authResult.idToken) {
+      if(authResult && authResult.accessToken && authResult.idToken) {
         window.location.hash = '';
-        this.setSession(authResult);
-        this.userService.findOrCreateByUser(authResult);
-        this.router.navigate(['/']);
-      } else if (err) {
-        this.router.navigate(['/resolve']);
-        console.log(err);
+        const user = this.userService.buildUser(authResult);
+        this.setSession(authResult, user);
+      } else {
+        this.login();
       }
     });
   }
 
-  private setSession(authResult): void {
+  private setSession(authResult, user): any {
     // Set the time that the Access Token will expire at
     const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
+    let stringified = JSON.stringify(user);
+    localStorage.setItem('current_user', stringified);
     localStorage.setItem('access_token', authResult.accessToken);
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
+    return authResult;
   }
 
   public logout(): void {
-    // Remove tokens and expiry time from localStorage
+    // Remove tokens, expiry time and current user from localStorage
+    localStorage.removeItem('current_user');
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');

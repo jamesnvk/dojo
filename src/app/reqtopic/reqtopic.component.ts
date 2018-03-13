@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {AuthService} from '../auth/auth.service';
 import {environment} from '../../environments/environment';
+import {Topic} from './topic';
+import {UserService} from '../user/user.service';
 
 @Component({
   selector: 'app-reqtopic',
@@ -10,27 +12,23 @@ import {environment} from '../../environments/environment';
 })
 export class ReqtopicComponent implements OnInit {
 
-  timeAllottedValues = [15, 30, 60, 90];
   submitted = false;
 
-  constructor(private http: HttpClient, private authService: AuthService) { }
+  constructor(private http: HttpClient, private authService: AuthService, private userService: UserService) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-  createTopic(topic) {
-    console.log(topic.value);
-    this.submitted = true;
+  public createTopic(topicForm): void {
+    const topic = new Topic();
+    topic.active = true;
+    topic.title = topicForm.value.title;
+    topic.description = topicForm.value.description;
+    topic.users = [this.userService.getCurrentUser().get, this];
 
-    let timeAllottedString: String = topic.value.timeAllotted;
-
-    let timeNum = Number(timeAllottedString.substr(0, 2));
-
-    topic.value.timeAllotted = timeNum;
-
-    this.http.post(environment.apiPostTopic, topic.value)
+    this.http.post(environment.apiPostTopic, topic)
       .subscribe(data => { return; });
-    topic.reset();
+    topicForm.reset();
+    this.submitted = true;
   }
 
 }

@@ -6,9 +6,10 @@
           <div class="card-header"> Novice: Username </div>
           <div class="card-body" >
             <h4>{{topic.title}}</h4>
-            <h6 class="text-muted">1hr 30 mins</h6>
-            <p>{{topic.description}}</p>
+            <h6 class="text-muted">{{topic.description}}</h6>
+            <p class="date">Posted 3/12/18</p>
             <button (click)="teach()" class="btn btn-primary">Teach</button>
+            <button (click)="readMore()" class="btn btn-primary">Read More</button>
           </div>
         </div>
       </div>

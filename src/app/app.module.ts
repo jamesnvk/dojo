@@ -10,7 +10,6 @@ import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import {FormsModule} from '@angular/forms';
 import {AuthService} from './auth/auth.service';
-import { CallbackComponent } from './callback/callback.component';
 import {UserService} from './user/user.service';
 import {AuthGuard} from './auth/auth.guard';
 import { ResolveComponent } from './resolve/resolve.component';
@@ -24,7 +23,6 @@ import {NavbarService} from './navbar/navbar.service';
     ReqtopicComponent,
     LeaderboardComponent,
     NavbarComponent,
-    CallbackComponent,
     ResolveComponent
   ],
   imports: [
@@ -46,10 +44,6 @@ import {NavbarService} from './navbar/navbar.service';
         path: 'leaderboard',
         component: LeaderboardComponent,
         canActivate: [AuthGuard]
-      },
-      {
-        path: 'callback',
-        component: CallbackComponent
       },
       {
         path: 'resolve',

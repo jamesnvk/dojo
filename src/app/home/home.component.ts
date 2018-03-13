@@ -1,6 +1,6 @@
 import { environment } from '../../environments/environment';
 import { Component, OnInit } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -20,8 +20,11 @@ export class HomeComponent implements OnInit {
   }
 
   public getTopics(): void {
-    this.http.get(environment.apiGetActiveTopics)
-      .subscribe(data => {
+    const token = localStorage.getItem('id_token')
+    const headers = new HttpHeaders({'Authorization': `Bearer ${token}`});
+    const httpOptions = {headers: headers};
+    this.http.get(environment.apiGetActiveTopics, httpOptions)
+    .subscribe(data => {
           data['Items'].forEach(i => {
             this.topics.push(i);
           });
@@ -31,7 +34,7 @@ export class HomeComponent implements OnInit {
         });
   }
 
-  teach() {
+  public teach() {
     alert('this is working!');
     console.log(this.topics);
   }
