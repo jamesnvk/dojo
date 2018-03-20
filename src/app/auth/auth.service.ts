@@ -4,6 +4,7 @@ import 'rxjs/add/operator/filter';
 import * as auth0 from 'auth0-js';
 import {environment} from '../../environments/environment';
 import {UserService} from '../user/user.service';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable()
 export class AuthService {
@@ -19,9 +20,7 @@ export class AuthService {
 
   // redirectUri: environment.endpoint   ->   use as callback URL in auth0 profile
 
-  constructor(public router: Router, private userService: UserService) {
-    this.checkToken();
-  }
+  constructor(public router: Router, private userService: UserService, private http: HttpClient) {}
 
   public login(): void {
     this.auth0.authorize();
@@ -38,6 +37,10 @@ export class AuthService {
         this.login();
       }
     });
+  }
+
+  public setIdToken(idToken): void {
+    localStorage.setItem('id_token', idToken);
   }
 
   public checkToken(): void {
@@ -67,12 +70,7 @@ export class AuthService {
   }
 
   public logout(): void {
-    // Remove tokens, expiry time and current user from localStorage
-    localStorage.removeItem('current_user');
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('id_token');
-    localStorage.removeItem('expires_at');
-    // Go back to the home route
+    localStorage.clear();
     this.router.navigate(['/resolve']);
   }
 
@@ -81,5 +79,12 @@ export class AuthService {
     // Access Token's expiry time
     const expiresAt = JSON.parse(localStorage.getItem('expires_at'));
     return new Date().getTime() < expiresAt;
+  }
+
+  public sendRequest(fn): void {
+      const token = localStorage.getItem('id_token')
+      const headers = new HttpHeaders({'Authorization': `Bearer ${token}`});
+      const httpOptions = {headers: headers};
+      fn(httpOptions);
   }
 }

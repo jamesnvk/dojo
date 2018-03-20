@@ -1,6 +1,7 @@
 import { environment } from '../../environments/environment';
 import { Component, OnInit } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {AuthService} from '../auth/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
   topics = [];
   isDataLoaded = false;
@@ -20,23 +21,24 @@ export class HomeComponent implements OnInit {
   }
 
   public getTopics(): void {
-    const token = localStorage.getItem('id_token')
-    const headers = new HttpHeaders({'Authorization': `Bearer ${token}`});
-    const httpOptions = {headers: headers};
-    this.http.get(environment.apiGetActiveTopics, httpOptions)
-    .subscribe(data => {
-          data['Items'].forEach(i => {
-            this.topics.push(i);
+    this.authService.sendRequest((options) => {
+      this.http.get(environment.apiGetActiveTopics, options)
+      .subscribe(data => {
+            data['Items'].forEach(i => {
+              this.topics.push(i);
+            });
+          },
+          err => {
+            console.log('Error occured:' + err);
           });
-        },
-        err => {
-          console.log('Error occured:' + err);
-        });
+    })
   }
 
   public teach() {
     alert('this is working!');
     console.log(this.topics);
   }
+
+  
 
 }

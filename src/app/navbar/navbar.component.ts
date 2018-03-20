@@ -10,11 +10,8 @@ import {NavbarService} from './navbar.service';
 })
 export class NavbarComponent implements OnInit {
 
-  const user = {};
-
   constructor(private authService: AuthService, public userService: UserService, private nav: NavbarService) {}
   ngOnInit() {
-    //this.user['picture'] = this.userService.getUser();
   }
 
   logout() {

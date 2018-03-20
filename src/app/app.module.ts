@@ -14,6 +14,7 @@ import {UserService} from './user/user.service';
 import {AuthGuard} from './auth/auth.guard';
 import { ResolveComponent } from './resolve/resolve.component';
 import {NavbarService} from './navbar/navbar.service';
+import { OauthComponent } from './oauth/oauth.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import {NavbarService} from './navbar/navbar.service';
     ReqtopicComponent,
     LeaderboardComponent,
     NavbarComponent,
-    ResolveComponent
+    ResolveComponent,
+    OauthComponent
   ],
   imports: [
     BrowserModule,

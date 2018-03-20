@@ -10,14 +10,12 @@ export class AuthGuard implements CanActivate {
   constructor(private router: Router, private auth: AuthService, private userService: UserService) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-
-    // access token = state.url
-    if(this.userService.getCurrentUser()) {
-      this.auth.checkToken();
-      return true;
-    } else if (state.url.includes('access_token')) {
+    if (state.url.includes('access_token')) {
+      let idToken = state.url.split('#')[1].split('&').filter(param => param.includes("id_token"))[0].split("=")[1]
+      this.auth.setIdToken(idToken);
       this.auth.handleAuthentication();
-      // closure here before true
+      return true;
+    } else if (localStorage.getItem('id_token') !== undefined && localStorage.getItem('id_token') !== null) {
       return true;
     } else {
       // not logged in so redirect to auth0 login
