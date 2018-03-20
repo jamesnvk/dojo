@@ -30,9 +30,14 @@ export class UserService {
     return user;
   }
 
+  // "current user" is the user that is in local storage
   public getCurrentUser() {
     return JSON.parse(localStorage.getItem('current_user'));
   }
+
+  // public getUser() {
+  //   this.http.get(environment.)
+  // }
 
   public buildUser(payload): User {
       let user = new User();

@@ -19,7 +19,9 @@ export class AuthService {
 
   // redirectUri: environment.endpoint   ->   use as callback URL in auth0 profile
 
-  constructor(public router: Router, private userService: UserService) {}
+  constructor(public router: Router, private userService: UserService) {
+    this.checkToken();
+  }
 
   public login(): void {
     this.auth0.authorize();
@@ -27,11 +29,27 @@ export class AuthService {
 
   public handleAuthentication(): void {
     this.auth0.parseHash((err, authResult) => {
+      // need this callback to finish executing before returning true
       if(authResult && authResult.accessToken && authResult.idToken) {
         window.location.hash = '';
         const user = this.userService.buildUser(authResult);
         this.setSession(authResult, user);
       } else {
+        this.login();
+      }
+    });
+  }
+
+  public checkToken(): void {
+    this.auth0.checkSession({
+      audience: 'https://jgdojo.auth0.com/userinfo',
+      scope: 'read:order write:order'
+    }, (err, res) => {
+      console.log(res);
+      if(res !== undefined) {
+        this.setSession(res, localStorage.getItem('current_user'));
+      } else {
+        console.log(err);
         this.login();
       }
     });
