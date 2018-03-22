@@ -8,13 +8,13 @@
     <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
       <ul class="navbar-nav">
         <li class="nav-item links">
-          <a routerLink="/leaderboard" class="nav-link" href="#"><i class="fa d-inline fa-lg fa-fire"></i> Leaderboards</a>
+          <a routerLink="/leaderboard" class="nav-link" href="#"><i class="fa d-inline fa-lg fa-fire"></i> Leaderboard</a>
         </li>
         <li class="nav-item links">
           <a routerLink="/reqtopic" class="nav-link" href="#"><i class="fa d-inline fa-lg fa-code"></i> Request a topic</a>
         </li>
         <li>
-            <img (click)="logout()" class="avatar" src="https://lh5.googleusercontent.com/-l3QmW4UrSPI/AAAAAAAAAAI/AAAAAAAAADg/oovm_SdUPIM/photo.jpg">
+            <img (click)="logout()" class="avatar" src="{{this.userService.getCurrentUserPic()}}">
         </li>
         <li>
           <button

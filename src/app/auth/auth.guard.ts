@@ -11,6 +11,7 @@ export class AuthGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     if (state.url.includes('access_token')) {
+      //debugger
       let idToken = state.url.split('#')[1].split('&').filter(param => param.includes("id_token"))[0].split("=")[1]
       this.auth.setIdToken(idToken);
       this.auth.handleAuthentication();

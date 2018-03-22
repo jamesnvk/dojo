@@ -2,6 +2,7 @@ import { environment } from '../../environments/environment';
 import { Component, OnInit } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {AuthService} from '../auth/auth.service';
+import {UserService} from '../user/user.service';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +11,7 @@ import {AuthService} from '../auth/auth.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private http: HttpClient, private authService: AuthService) { }
+  constructor(private http: HttpClient, private authService: AuthService, private userService: UserService) { }
 
   topics = [];
   isDataLoaded = false;
@@ -36,7 +37,10 @@ export class HomeComponent implements OnInit {
 
   public teach() {
     alert('this is working!');
-    console.log(this.topics);
+  }
+
+  public readMore() {
+    alert('Modal will be here!');
   }
 
   

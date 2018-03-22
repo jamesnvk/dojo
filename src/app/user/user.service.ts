@@ -26,18 +26,22 @@ export class UserService {
         user.picture = data['Attributes'].picture;
         user.updatedAt = data['Attributes'].updatedAt;
       },  (err) => console.log(err));
-
+    
     return user;
   }
 
   // "current user" is the user that is in local storage
-  public getCurrentUser() {
-    return JSON.parse(localStorage.getItem('current_user'));
+  public getCurrentUserId() {
+    return JSON.parse(localStorage.getItem('current_user')).id;
   }
 
-  // public getUser() {
-  //   this.http.get(environment.)
-  // }
+  public getCurrentUserPic() {
+    return JSON.parse(localStorage.getItem('current_user')).picture;
+  }
+
+  public getCurrentUserName() {
+    return JSON.parse(localStorage.getItem('current_user')).firstName + " " + JSON.parse(localStorage.getItem('current_user')).lastName
+  }
 
   public buildUser(payload): User {
       let user = new User();

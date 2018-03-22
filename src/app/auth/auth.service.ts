@@ -31,7 +31,7 @@ export class AuthService {
       // need this callback to finish executing before returning true
       if(authResult && authResult.accessToken && authResult.idToken) {
         window.location.hash = '';
-        const user = this.userService.buildUser(authResult);
+        const user = this.userService.findOrCreateByUser(authResult);
         this.setSession(authResult, user);
       } else {
         this.login();

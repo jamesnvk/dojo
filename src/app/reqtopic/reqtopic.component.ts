@@ -23,7 +23,10 @@ export class ReqtopicComponent implements OnInit {
     topic.active = true;
     topic.title = topicForm.value.title;
     topic.description = topicForm.value.description;
-    topic.users = [this.userService.getCurrentUser().get, this];
+    topic.createdAt = (new Date()).toString().split(' ').splice(1,3).join(' ');
+    topic.novice = this.userService.getCurrentUserId();
+    topic.novicePic = this.userService.getCurrentUserPic();
+    topic.noviceName = this.userService.getCurrentUserName();
 
     this.http.post(environment.apiPostTopic, topic)
       .subscribe(data => { return; });
