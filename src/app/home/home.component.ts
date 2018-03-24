@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit {
 
   topics = [];
   isDataLoaded = false;
+  submitted = false;
 
   ngOnInit() {
     this.getTopics();
@@ -46,9 +47,11 @@ export class HomeComponent implements OnInit {
     topic.id = topicObj.topicId;
     topic.updatedAt = (new Date()).toString().split(' ').splice(1,3).join(' ');
     topic.expert = this.userService.getCurrentUserId();
+    topic.active = false;
 
       this.http.post(environment.apiUpdateTopic, topic)
       .subscribe(data => { return; });
+      this.submitted = true;
   }
 
   public pairModal(pairContent) {

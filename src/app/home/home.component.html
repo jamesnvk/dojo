@@ -1,5 +1,10 @@
 <div class="py-5">
   <div class="container">
+
+      <div class="alert alert-success" *ngIf="submitted">
+          <strong>You're paired! Please remember to send your Google Calendar invite (integration coming soon)</strong>
+        </div>
+
     <div class="row" >
       <div class="col-md-4" *ngFor="let topic of topics">
           <!-- Pair Modal -->
