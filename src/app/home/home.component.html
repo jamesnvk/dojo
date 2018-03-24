@@ -2,6 +2,21 @@
   <div class="container">
     <div class="row" >
       <div class="col-md-4" *ngFor="let topic of topics">
+          <!-- Pair Modal -->
+          <ng-template #pairContent let-c="close" let-d="dismiss">
+                <!-- <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button> -->
+              <div class="modal-body" id="modal">
+                <p id="pmodal">Pair with <img class="avatar" src={{topic.novicePic}}> {{topic.noviceName}}?</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" (click)="pair(topic);c()">Pair</button>
+                <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Cancel</button>
+              </div>
+            </ng-template>
+          <!-- end Modal -->
+        
         <div class="card" *ngIf="isDataLoaded">
           <div class="card-header">
             <img class="avatar" src={{topic.novicePic}}> {{topic.noviceName}}
@@ -10,8 +25,10 @@
             <h5>{{topic.title}}</h5>
             <!-- <h6 class="text-muted">{{topic.description}}</h6> -->
             <p class="date">Posted {{topic.createdAt}}</p>
-            <button (click)="teach()" class="btn btn-primary">Pair</button>
-            <button (click)="readMore()" class="btn btn-primary">Read More</button>
+            <button (click)="pairModal(pairContent)" class="btn btn-primary">Pair</button>
+            <button class="btn btn-primary" placement="bottom" ngbPopover={{topic.description}} popoverTitle="Description">
+              Read More
+            </button>
           </div>
         </div>
       </div>

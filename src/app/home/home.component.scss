@@ -10,6 +10,19 @@
   animation: fadein 2s;
 }
 
+#modal {
+  -webkit-animation: fadein 0.5s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: fadein 0.5s; /* Firefox < 16 */
+  -ms-animation: fadein 0.5s; /* Internet Explorer */
+  animation: fadein 0.5s;
+}
+
+#pmodal {
+  text-align: center;
+  font-size: large;
+  padding-top: 20px;
+}
+
 .avatar {
   border-radius: 100px;
 }

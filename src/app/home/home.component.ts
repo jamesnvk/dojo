@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {AuthService} from '../auth/auth.service';
 import {UserService} from '../user/user.service';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { Topic } from '../reqtopic/topic';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +13,11 @@ import {UserService} from '../user/user.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private http: HttpClient, private authService: AuthService, private userService: UserService) { }
+  constructor(private http: HttpClient, 
+    private authService: AuthService, 
+    private userService: UserService,
+    private modalService: NgbModal
+    ) { }
 
   topics = [];
   isDataLoaded = false;
@@ -35,12 +41,22 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  public teach() {
-    alert('this is working!');
+  public pair(topicObj) {
+    const topic = new Topic();
+    topic.id = topicObj.topicId;
+    topic.updatedAt = (new Date()).toString().split(' ').splice(1,3).join(' ');
+    topic.expert = this.userService.getCurrentUserId();
+
+      this.http.post(environment.apiUpdateTopic, topic)
+      .subscribe(data => { return; });
   }
 
-  public readMore() {
-    alert('Modal will be here!');
+  public pairModal(pairContent) {
+    this.modalService.open(pairContent).result.then((result) => {
+      console.log(result) 
+      }, (cancelled) => {
+        console.log(cancelled);
+    });
   }
 
   

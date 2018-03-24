@@ -28,8 +28,9 @@ export class ReqtopicComponent implements OnInit {
     topic.novicePic = this.userService.getCurrentUserPic();
     topic.noviceName = this.userService.getCurrentUserName();
 
-    this.http.post(environment.apiPostTopic, topic)
-      .subscribe(data => { return; });
+      this.http.post(environment.apiPostTopic, topic)
+        .subscribe(data => { return; });
+    
     topicForm.reset();
     this.submitted = true;
   }
