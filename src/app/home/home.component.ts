@@ -22,6 +22,7 @@ export class HomeComponent implements OnInit {
   topics = [];
   isDataLoaded = false;
   submitted = false;
+  pairedNovice = '';
 
   ngOnInit() {
     this.getTopics();
@@ -50,8 +51,12 @@ export class HomeComponent implements OnInit {
     topic.active = false;
 
       this.http.post(environment.apiUpdateTopic, topic)
-      .subscribe(data => { return; });
-      // return topic , use topic.noviceName to post into alert and remove from topics array by topicId using .find
+      .subscribe(data => {
+        let index = this.topics.findIndex(e => e.topicId === data["Attributes"].topicId)
+        this.topics.splice(index, 1)
+        this.pairedNovice = data["Attributes"].noviceName
+        console.log(data["Attributes"].topicId) 
+      });
       this.submitted = true;
   }
 
