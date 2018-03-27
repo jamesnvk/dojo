@@ -7,6 +7,6 @@ export class Topic {
   public title: string;
   public novice: number;
   public expert: number;
-  public novicePic: String;
-  public noviceName: String;
+  public novicePic: string;
+  public noviceName: string;
 }

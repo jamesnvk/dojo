@@ -51,6 +51,7 @@ export class HomeComponent implements OnInit {
 
       this.http.post(environment.apiUpdateTopic, topic)
       .subscribe(data => { return; });
+      // return topic , use topic.noviceName to post into alert and remove from topics array by topicId using .find
       this.submitted = true;
   }
 
@@ -61,7 +62,5 @@ export class HomeComponent implements OnInit {
         console.log(cancelled);
     });
   }
-
-  
 
 }

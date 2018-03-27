@@ -15,6 +15,7 @@ import {UserService} from './user/user.service';
 import {AuthGuard} from './auth/auth.guard';
 import { ResolveComponent } from './resolve/resolve.component';
 import {NavbarService} from './navbar/navbar.service';
+import { SlackService } from './slack/slack.service';
 
 
 @NgModule({
@@ -53,7 +54,7 @@ import {NavbarService} from './navbar/navbar.service';
       }
     ])
   ],
-  providers: [AuthService, UserService, AuthGuard, NavbarService],
+  providers: [AuthService, UserService, AuthGuard, NavbarService, SlackService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

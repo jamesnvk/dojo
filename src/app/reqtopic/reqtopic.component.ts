@@ -4,6 +4,7 @@ import {AuthService} from '../auth/auth.service';
 import {environment} from '../../environments/environment';
 import {Topic} from './topic';
 import {UserService} from '../user/user.service';
+import { SlackService } from '../slack/slack.service';
 
 @Component({
   selector: 'app-reqtopic',
@@ -14,7 +15,11 @@ export class ReqtopicComponent implements OnInit {
 
   submitted = false;
 
-  constructor(private http: HttpClient, private authService: AuthService, private userService: UserService) { }
+  constructor(private http: HttpClient,
+    private authService: AuthService,
+    private userService: UserService,
+    private slackService: SlackService
+  ) { }
 
   ngOnInit() {}
 
@@ -29,8 +34,9 @@ export class ReqtopicComponent implements OnInit {
     topic.noviceName = this.userService.getCurrentUserName();
 
       this.http.post(environment.apiPostTopic, topic)
-        .subscribe(data => { return; });
-    
+        .subscribe(data => { 
+          this.slackService.slackTopicRequested(data);
+         });
     topicForm.reset();
     this.submitted = true;
   }

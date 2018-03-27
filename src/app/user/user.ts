@@ -3,6 +3,6 @@ export class User {
   public firstName: string;
   public lastName: string;
   public picture: string;
-  // public numSchooled: number;
+  public numSchooled: number;
   public updatedAt: string;
 }
