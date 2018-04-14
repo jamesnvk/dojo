@@ -5,7 +5,7 @@ export class SlackService {
 
   constructor() { }
 
-  url = 'https://hooks.slack.com/services/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';
+  url = 'https://hooks.slack.com/services/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';
 
   public slackTopicRequested(data): void {
 

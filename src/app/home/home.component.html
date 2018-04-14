@@ -28,7 +28,6 @@
           </div>
           <div class="card-body" >
             <h5>{{topic.title}}</h5>
-            <!-- <h6 class="text-muted">{{topic.description}}</h6> -->
             <p class="date">Posted {{topic.createdAt}}</p>
             <button (click)="pairModal(pairContent)" class="btn btn-primary">Pair</button>
             <button class="btn btn-primary" placement="bottom" ngbPopover={{topic.description}} popoverTitle="Description">
